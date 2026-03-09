@@ -73,9 +73,8 @@ export default {
               displayColors: true,
               callbacks: {
                 label: function(context) {
-                  const label = context.label || '';
                   const value = context.raw || '';
-                  return `${label}: ${value} 技能点`;
+                  return `回复概率: ${value}%`;
                 },
                 title: function(context) {
                   return `${context[0].label}`;
@@ -89,8 +88,8 @@ export default {
                 display: false,
               },
               grid: {
-                color: 'rgba(0, 0, 0, 0.1)',
-                lineWidth: 0.5,
+                color: 'rgba(255, 255, 255, 0.2)',
+                lineWidth: 1,
               },
               angleLines: {
                 color: 'rgba(0, 0, 0, 0.2)',

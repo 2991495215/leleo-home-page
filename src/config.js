@@ -1,14 +1,15 @@
 const config = {
 	//网页元数据
 	metaData: {
-		title: 'Leleo的个人主页🎉',
-		description: '欢迎来到Leleo的奇妙世界！',
-		keywords: 'Leleo,leleo,个人主页,个人网站',
+		title: 'Trent的个人主页🎉',
+		description: '欢迎来到Trent的奇妙世界！',
+		keywords: 'Trent,Trent,个人主页,个人网站',
 		icon: '/favicon.ico'   //网页图标，支持外链
 	},
 
-	avatar: "/img/avatar.jpg", // 头像
-	welcometitle: "Hi, I'm Leleo", // 标题
+	// avatar: "/img/avatar.jpg", // 头像
+	avatar: "/img/Stephen_Avatar.jpg", // 头像
+	welcometitle: "Hi, I'm Trent", // 标题
 
 	// 颜色配置
 	color: {
@@ -22,24 +23,24 @@ const config = {
 	blur: 5, // 毛玻璃模糊效果
 
 	// 我的标签
-	tags: ['乐观开朗', '温柔体贴', '随和亲切', '冷静沉着', '才思敏捷', '风趣幽默', '刚正不阿', '善解人意'],
+	tags: ['间歇性奋斗', '拖延症末期',  '赖床冠军', '深夜网抑云',  '烧水劝退师', '选择困难症', '退堂鼓艺术家'],
 
 	// 默认背景壁纸
 	background: {
 		"pc": {   //pc端
 			"type": "pic",   //"pic":静态壁纸;"video":动态壁纸
 			"datainfo": {
-				"title": "海洋女孩",
-				"preview": "/img/wallpaper/static/海洋女孩/image-pre.webp",
-				"url": "/img/wallpaper/static/海洋女孩/image.png",     //当然，也可填写网络地址或壁纸api，如随机PC壁纸api："url":"https://t.mwm.moe/pc"
+				"title": "边缘行者",
+				"preview": "/img/new-wallpaper/static/边缘行者/image-pre.webp",
+				"url": "/img/new-wallpaper/static/边缘行者/image.png",     //当然，也可填写网络地址或壁纸api，如随机PC壁纸api："url":"https://t.mwm.moe/pc"
 			},
 		},
 		"mobile": {   //移动端
 			"type": "pic",
 			"datainfo": {
-				"title": "0001",
-				"preview": "/img/wallpaper/static-mobile/0001/image-pre.webp",
-				"url": "/img/wallpaper/static-mobile/0001/image.png"  //同理，随机移动端壁纸："url":"https://t.mwm.moe/mp"
+				"title": "0002",
+				"preview": "/img/new-wallpaper/static-mobile/0002/image-pre.webp",
+				"url": "/img/new-wallpaper/static-mobile/0002/image.png"  //同理，随机移动端壁纸："url":"https://t.mwm.moe/mp"
 			}
 		}
 
@@ -47,18 +48,18 @@ const config = {
 
 	//极坐标图数据
 	polarChart: {
-		skills: ['Vue.js', 'React', 'JavaScript', 'Node', 'Java', 'Python', 'linux', 'Docker', 'MySQL', 'MongoDB', 'AWS'],
-		skillPoints: [85, 78, 88, 90, 80, 78, 85, 65, 82, 78, 70],
+		skills: ['子时 00:00-02:00', '丑时 02:00-04:00', '寅时 04:00-06:00', '卯时 06:00-08:00', '辰时 08:00-10:00', '巳时 10:00-12:00', '午时 12:00-14:00', '未时 14:00-16:00', '申时 16:00-18:00', '酉时 18:00-20:00', '戌时 20:00-22:00', '亥时 22:00-00:00'],
+		skillPoints: [90, 70, 20, 60, 20, 50, 80, 40, 50, 60, 70, 80],
 	},
 
 	//社交按钮
 	socialPlatformIcons: [
-		{ icon: "mdi-github", link: "https://www.github.com/leleo886" },
+		// { icon: "mdi-github", link: "https://www.github.com/leleo886" },
 		{ icon: "mdi-email", link: "mailto:leleo886@foxmail.com" },
 		{ icon: "mdi-qqchat", link: "https://im.qq.com/" },
 		{ icon: "mdi-wechat", link: "https://wx.qq.com/" },
-		{ icon: "mdi-youtube", link: "https://www.youtube.com" },
-		{ icon: "mdi-facebook", link: "https://www.facebook.com" }
+		// { icon: "mdi-youtube", link: "https://www.youtube.com" },
+		// { icon: "mdi-facebook", link: "https://www.facebook.com" }
 	],
 
 	//打字机
@@ -71,34 +72,47 @@ const config = {
 
 	//音乐播放配置，采用MetingJS Api(https://github.com/metowolf/MetingJS)
 	musicPlayer: {
-		server: 'netease',  //服务提供商 --网易云音乐
+		server: 'tencent',  //服务提供商 --QQ音乐
 		type: 'playlist',   //歌单类型
-		id: '2028178887'  //歌单id ---> music.163.com/#/playlist?id=2028178887
+		id: '9677936501'  //歌单id ---> https://i.y.qq.com/n2/m/share/details/taoge.html?id=9677936501
 	},
 
 	//壁纸数据 -----可以将壁纸文件上传到图床获取网络直链。若想调用api，请前往脚本自行修改逻辑
 	wallpaper: {
 		pic: [
-			{ "title": "海洋女孩", "preview": "/img/wallpaper/static/海洋女孩/image-pre.webp", "url": "/img/wallpaper/static/海洋女孩/image.png" },
-			{ "title": "书房夜晚", "preview": "/img/wallpaper/static/书房夜晚/image-pre.webp", "url": "/img/wallpaper/static/书房夜晚/image.png" },
-			{ "title": "安逸舒适", "preview": "/img/wallpaper/static/安逸舒适/image-pre.webp", "url": "/img/wallpaper/static/安逸舒适/image.png" },
-			{ "title": "jswcMaMj", "preview": "https://s21.ax1x.com/2025/07/23/pVGli59.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGli59.jpg" },
-			{ "title": "pgtTqoqq", "preview": "https://s21.ax1x.com/2025/07/23/pVGlmDO.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGlmDO.jpg" },
-			{ "title": "cvKMKhue", "preview": "https://s21.ax1x.com/2025/07/23/pVGlNqS.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGlNqS.jpg" },
-			{ "title": "XpxvQVoP", "preview": "https://s21.ax1x.com/2025/07/23/pVGlfIJ.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGlfIJ.jpg" },
-			{ "title": "fVEEjEOA", "preview": "https://s21.ax1x.com/2025/07/23/pVGlEgx.md.webp", "url": "https://s21.ax1x.com/2025/07/23/pVGlEgx.webp" },
-			{ "title": "jgnIKMpd", "preview": "https://s21.ax1x.com/2025/07/23/pVGldaQ.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGldaQ.jpg" },
-			{ "title": "mgqyySeh", "preview": "https://s21.ax1x.com/2025/07/23/pVGl82t.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGl82t.jpg" },
-			{ "title": "dSXZfZp", "preview": "https://s21.ax1x.com/2025/07/23/pVGlaVg.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGlaVg.jpg" },
+			{ "title": "边缘行者", "preview": "/img/new-wallpaper/static/边缘行者/image-pre.webp", "url": "/img/new-wallpaper/static/边缘行者/image.png" },
+			{ "title": "边缘行者2", "preview": "/img/new-wallpaper/static/边缘行者2/image-pre.webp", "url": "/img/new-wallpaper/static/边缘行者2/image.png" },
+			{ "title": "天气之子", "preview": "/img/new-wallpaper/static/天气之子/image-pre.webp", "url": "/img/new-wallpaper/static/天气之子/image.png" },
+			{ "title": "男孩和不知名动物", "preview": "/img/new-wallpaper/static/男孩和不知名动物/image-pre.webp", "url": "/img/new-wallpaper/static/男孩和不知名动物/image.png" },
+			{ "title": "达令", "preview": "/img/new-wallpaper/static/达令/image-pre.webp", "url": "/img/new-wallpaper/static/达令/image.png" },
+			{ "title": "达令2", "preview": "/img/new-wallpaper/static/达令2/image-pre.webp", "url": "/img/new-wallpaper/static/达令2/image.png" },
+			{ "title": "雷古", "preview": "/img/new-wallpaper/static/雷古/image-pre.webp", "url": "/img/new-wallpaper/static/雷古/image.png" },
+			{ "title": "传说之下小花", "preview": "/img/new-wallpaper/static/传说之下小花/image-pre.webp", "url": "/img/new-wallpaper/static/传说之下小花/image.png" },
+			{ "title": "水手男孩", "preview": "/img/new-wallpaper/static/水手男孩/image-pre.webp", "url": "/img/new-wallpaper/static/水手男孩/image.png" },
 		],
 		picMobile: [
-			{ "title": "0001", "preview": "/img/wallpaper/static-mobile/0001/image-pre.webp", "url": "/img/wallpaper/static-mobile/0001/image.png" },
-			{ "title": "0002", "preview": "/img/wallpaper/static-mobile/0002/image-pre.webp", "url": "/img/wallpaper/static-mobile/0002/image.png" },
-			{ "title": "0003", "preview": "/img/wallpaper/static-mobile/0003/image-pre.webp", "url": "/img/wallpaper/static-mobile/0003/image.png" },
-			{ "title": "0004", "preview": "/img/wallpaper/static-mobile/0004/image-pre.webp", "url": "/img/wallpaper/static-mobile/0004/image.png" },
-			{ "title": "DfNHPPcc", "preview": "https://s21.ax1x.com/2025/07/23/pVG1uQ0.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVG1uQ0.jpg" },
-			{ "title": "cZZwzhis", "preview": "https://s21.ax1x.com/2025/07/23/pVG1Vij.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVG1Vij.jpg" },
-			{ "title": "aANKZHPX", "preview": "https://s21.ax1x.com/2025/07/23/pVGlIR1.md.jpg", "url": "https://s21.ax1x.com/2025/07/23/pVGlIR1.jpg" },
+			{ "title": "0001", "preview": "/img/new-wallpaper/static-mobile/0001/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0001/image.png" },
+			{ "title": "0002", "preview": "/img/new-wallpaper/static-mobile/0002/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0002/image.png" },
+			{ "title": "0003", "preview": "/img/new-wallpaper/static-mobile/0003/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0003/image.png" },
+			{ "title": "0004", "preview": "/img/new-wallpaper/static-mobile/0004/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0004/image.png" },
+			{ "title": "0005", "preview": "/img/new-wallpaper/static-mobile/0005/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0005/image.png" },
+			{ "title": "0006", "preview": "/img/new-wallpaper/static-mobile/0006/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0006/image.png" },
+			{ "title": "0007", "preview": "/img/new-wallpaper/static-mobile/0007/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0007/image.png" },
+			{ "title": "0008", "preview": "/img/new-wallpaper/static-mobile/0008/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0008/image.png" },
+			{ "title": "0009", "preview": "/img/new-wallpaper/static-mobile/0009/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0009/image.png" },
+			{ "title": "0010", "preview": "/img/new-wallpaper/static-mobile/0010/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0010/image.png" },
+			{ "title": "0011", "preview": "/img/new-wallpaper/static-mobile/0011/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0011/image.png" },
+			{ "title": "0012", "preview": "/img/new-wallpaper/static-mobile/0012/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0012/image.png" },
+			{ "title": "0013", "preview": "/img/new-wallpaper/static-mobile/0013/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0013/image.png" },
+			{ "title": "0014", "preview": "/img/new-wallpaper/static-mobile/0014/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0014/image.png" },
+			{ "title": "0015", "preview": "/img/new-wallpaper/static-mobile/0015/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0015/image.png" },
+			{ "title": "0016", "preview": "/img/new-wallpaper/static-mobile/0016/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0016/image.png" },
+			{ "title": "0017", "preview": "/img/new-wallpaper/static-mobile/0017/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0017/image.png" },
+			{ "title": "0018", "preview": "/img/new-wallpaper/static-mobile/0018/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0018/image.png" },
+			{ "title": "0019", "preview": "/img/new-wallpaper/static-mobile/0019/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0019/image.png" },
+			{ "title": "0020", "preview": "/img/new-wallpaper/static-mobile/0020/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0020/image.png" },
+			{ "title": "0021", "preview": "/img/new-wallpaper/static-mobile/0021/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0021/image.png" },
+			{ "title": "0022", "preview": "/img/new-wallpaper/static-mobile/0022/image-pre.webp", "url": "/img/new-wallpaper/static-mobile/0022/image.png" },
 		],
 		video: [
 			{
@@ -148,7 +162,7 @@ const config = {
 		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 8", subtitle: "8,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
 	],
 
-	statement: ["备案号：XXICP备123456789号", "Copyright © 2025 Leleo"],
+	statement: [],
 }
 
 export default config

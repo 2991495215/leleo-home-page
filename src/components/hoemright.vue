@@ -51,8 +51,7 @@
             	<typewriter class="ma-3 d-flex align-center justify-center" style="min-height: 200px;"></typewriter>
             </v-col>
             <v-col cols="12" md="4" align="center">
-              <v-card class="ma-3" hover
-                >
+              <v-card class="ma-3" hover >
                   <template v-slot:title >
                     <span class="leleo-card-title clock-font">{{formattedTime}}</span>
                   </template>

@@ -89,7 +89,7 @@
                     <v-row align="center" justify="center" class="setting">
                     <v-col class="ma-1" cols="auto">
                         <v-speed-dial
-                            :location="xs||sm ?'top center':'right center'"
+                            :location="'top center'"
                             transition="slide-y-transition"
                         >
                         <template v-slot:activator="{ props: activatorProps }">
