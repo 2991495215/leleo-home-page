@@ -55,9 +55,9 @@ const config = {
 	//社交按钮
 	socialPlatformIcons: [
 		// { icon: "mdi-github", link: "https://www.github.com/leleo886" },
-		{ icon: "mdi-email", link: "mailto:leleo886@foxmail.com" },
-		{ icon: "mdi-qqchat", link: "https://im.qq.com/" },
-		{ icon: "mdi-wechat", link: "https://wx.qq.com/" },
+		{ icon: "mdi-email", link: "mailto:a2832893528@qq.com" },
+		{ icon: "mdi-qqchat", link: "https://qm.qq.com/q/AraDkhWLIs" },
+		{ icon: "mdi-wechat", link: "weixin://dl/chat?huangleihhh" },
 		// { icon: "mdi-youtube", link: "https://www.youtube.com" },
 		// { icon: "mdi-facebook", link: "https://www.facebook.com" }
 	],
