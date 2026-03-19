@@ -19,8 +19,8 @@ const config = {
 		turntablecolor2: "#00FFFF"   // 转盘渐变色二
 	},
 
-	brightness: 85, // 背景亮度 --%
-	blur: 5, // 毛玻璃模糊效果
+	brightness: 70, // 背景亮度 --%
+	blur: 10, // 毛玻璃模糊效果
 
 	// 我的标签
 	tags: ['间歇性奋斗', '拖延症末期',  '赖床冠军', '深夜网抑云',  '烧水劝退师', '选择困难症', '退堂鼓艺术家'],
@@ -152,12 +152,12 @@ const config = {
 
 	//项目卡片 其中 字段"show"控制初始卡片的text是否展开
 	projectcards: [
-		{ go: "🚀 前往", img: "/img/sunshine.jpg", title: "Project 1", subtitle: "1,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
-		{ go: "🗂️ 前往", img: "/img/sunshine.jpg", title: "Project 2", subtitle: "2,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
-		{ go: "📝 前往", img: "/img/sunshine.jpg", title: "Project 3", subtitle: "3,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
-		{ go: "👍 前往", img: "/img/sunshine.jpg", title: "Project 4", subtitle: "4,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
-		{ go: "🗃 前往", img: "/img/sunshine.jpg", title: "Project 5", subtitle: "5,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
-		{ go: "🎨 前往", img: "/img/sunshine.jpg", title: "Project 6", subtitle: "6,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
+		{ go: "🚀 前往", img: "/img/Project/project_nextchat.png", title: "NextChat", subtitle: "网页Ai对话客户端", text: "✨ 轻便快速的AI助手，支持Claude、DeepSeek、GPT4和Gemini Pro。", url: "https://nextchat.thirty30.top/", show: false },
+		{ go: "🗂️ 前往", img: "/img/Project/1Panel.png", title: "1Panel", subtitle: "我的VPS面板管理工具", text: "1Panel 提供直观易用的 Web 管理界面，让用户轻松掌控 Linux 服务器。", url: "https://1panel.thirty30.top/", show: false },
+		{ go: "📝 前往", img: "/img/Project/ntfy.png", title: "ntfy", subtitle: "消息广播", text: "基于 HTTP 的发布子通知服务。", url: "https://ntfy.thirty30.top/", show: false },
+		{ go: "👍 前往", img: "img/Project/CLI Proxy API.png", title: "CLI Proxy API", subtitle: "提供OpenAI等兼容的API接口", text: "一个代理服务器，提供 OpenAI/Gemini/Claude/Codex 兼容的 CLI API 接口。", url: "https://cpamc.thirty30.top/management.html#/", show: false },
+		{ go: "🗃 前往", img: "img/Project/LiteLLM API.png", title: "LiteLLM API", subtitle: "统一调用百种大模型的接口", text: "LiteLLM 是一个开源工具，允许你使用 OpenAI 的 API 格式（输入和输出）来调用 超过 100+ 不同的大语言模型 (LLMs)", url: "https://litellm.thirty30.top/", show: false },
+		{ go: "🎨 前往", img: "img/Project/3x-ui-light.png", title: "3X-UI", subtitle: "可视化多协议代理管理面板", text: "一个基于网页的高级开源控制面板，专为管理 Xray-core 服务器而设计。它提供了用户友好的界面，用于配置和监控各种 VPN 和代理协议。", url: "https://xui.thirty30.top/", show: false },
 		{ go: "💍 前往", img: "/img/sunshine.jpg", title: "Project 7", subtitle: "7,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
 		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 8", subtitle: "8,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
 	],

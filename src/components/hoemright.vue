@@ -79,7 +79,7 @@
                   <v-img
                     aspect-ratio="1.7778"
                     :src= item.img
-                    cover
+                    contain
                     :style="{ opacity: 0.8 }"
                   ></v-img>
                   <v-card-title :style="xs?{'font-size': '0.9rem','padding': '0.15rem 0.5rem'}:{'font-size': '1.1rem','padding':'0.2rem 0.8rem'}">
