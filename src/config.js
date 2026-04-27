@@ -8,7 +8,7 @@ const config = {
 	},
 
 	// avatar: "/img/avatar.jpg", // 头像
-	avatar: "/img/Stephen_Avatar.jpg", // 头像
+	avatar: "/img/tx4.png", // 头像
 	welcometitle: "Hi, I'm Trent", // 标题
 
 	// 颜色配置
@@ -64,8 +64,8 @@ const config = {
 
 	//打字机
 	typeWriterStrings: [
-		"如果你看到了这行字，说明你离捕获一个全能打工人只差一个面试通知。",
-		"比起诗和远方，我现在更需要一个能准时发工资的甲方。",
+		"如果你看到了这行字，说明我们也许会有一场很有意思的相遇。",
+		"比起匆忙赶路，我更愿意认真生活，慢慢靠近自己想要的远方。",
 		"心简单，世界就简单，幸福才会生长；心自由，生活就自由，到哪都有快乐。",
 		"生命太短，没有时间留给遗憾，若不是终点，请微笑一直向前。"
 	],
@@ -152,12 +152,12 @@ const config = {
 
 	//项目卡片 其中 字段"show"控制初始卡片的text是否展开
 	projectcards: [
-		{ go: "🚀 前往", img: "/img/Project/project_nextchat.png", title: "NextChat", subtitle: "网页Ai对话客户端", text: "✨ 轻便快速的AI助手，支持Claude、DeepSeek、GPT4和Gemini Pro。", url: "https://nextchat.thirty30.top/", show: false },
-		{ go: "🗂️ 前往", img: "/img/Project/1Panel.png", title: "1Panel", subtitle: "我的VPS面板管理工具", text: "1Panel 提供直观易用的 Web 管理界面，让用户轻松掌控 Linux 服务器。", url: "https://1panel.thirty30.top/", show: false },
-		{ go: "📝 前往", img: "/img/Project/ntfy.png", title: "ntfy", subtitle: "消息广播", text: "基于 HTTP 的发布子通知服务。", url: "https://ntfy.thirty30.top/", show: false },
-		{ go: "👍 前往", img: "img/Project/CLI Proxy API.png", title: "CLI Proxy API", subtitle: "提供OpenAI等兼容的API接口", text: "一个代理服务器，提供 OpenAI/Gemini/Claude/Codex 兼容的 CLI API 接口。", url: "https://cpamc.thirty30.top/management.html#/", show: false },
-		{ go: "🗃 前往", img: "img/Project/LiteLLM API.png", title: "LiteLLM API", subtitle: "统一调用百种大模型的接口", text: "LiteLLM 是一个开源工具，允许你使用 OpenAI 的 API 格式（输入和输出）来调用 超过 100+ 不同的大语言模型 (LLMs)", url: "https://litellm.thirty30.top/", show: false },
-		{ go: "🎨 前往", img: "img/Project/3x-ui-light.png", title: "3X-UI", subtitle: "可视化多协议代理管理面板", text: "一个基于网页的高级开源控制面板，专为管理 Xray-core 服务器而设计。它提供了用户友好的界面，用于配置和监控各种 VPN 和代理协议。", url: "https://xui.thirty30.top/", show: false },
+		{ go: "🚀 前往", img: "/img/General Wallpaper/1407656.jpg", title: "NextChat", subtitle: "开源 AI 对话应用", text: "一个开源的 AI 聊天客户端，支持多模型、Markdown、插件与多端部署。", url: "https://example1.com", show: false },
+		{ go: "🗂️ 前往", img: "/img/General Wallpaper/1407685.png", title: "Trent Shop", subtitle: "个人小店", text: "售卖自用软件、脚本与折腾成果。", url: "https://shop.trent30.org/", show: false },
+		{ go: "📝 前往", img: "/img/sunshine.jpg", title: "Project 3", subtitle: "3,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
+		{ go: "👍 前往", img: "/img/sunshine.jpg", title: "Project 4", subtitle: "4,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
+		{ go: "🗃 前往", img: "/img/sunshine.jpg", title: "Project 5", subtitle: "5,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
+		{ go: "🎨 前往", img: "/img/sunshine.jpg", title: "Project 6", subtitle: "6,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
 		{ go: "💍 前往", img: "/img/sunshine.jpg", title: "Project 7", subtitle: "7,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
 		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 8", subtitle: "8,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://leleo.top", show: false },
 	],
