@@ -1,24 +1,20 @@
 export function setMeta(title,description,keywords,icon) {   
-  // 设置标题
   document.title = title;
 
-  // 设置描述
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription) {
     metaDescription.setAttribute('content', description);
   }
 
-  // 设置关键词
   const metaKeywords = document.querySelector('meta[name="keywords"]');
   if (metaKeywords) {
     metaKeywords.setAttribute('content', keywords);
   }
 
-   // 设置图标ico
-  const webico = document.querySelector('link[rel="icon"]');
-   if (webico) {
-    webico.href = icon;
-  }
+  const iconLinks = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
+  iconLinks.forEach((link) => {
+    link.href = icon;
+  });
 }
 
 export function getFormattedTime(currentDate){

@@ -4,7 +4,7 @@ const config = {
 		title: 'Trent的个人主页🎉',
 		description: '欢迎来到Trent的奇妙世界！',
 		keywords: 'Trent,Trent,个人主页,个人网站',
-		icon: '/favicon.ico'   //网页图标，支持外链
+		icon: '/img/tx4.png?v=3'   //网页图标，支持外链
 	},
 
 	// avatar: "/img/avatar.jpg", // 头像
