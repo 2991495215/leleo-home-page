@@ -266,12 +266,19 @@ export default {
     async getMusicInfo(){
       this.musicinfoLoading = true;
       try {
-        const response = await fetch(`https://api.i-meto.com/meting/api?server=${this.configdata.musicPlayer.server}&type=${this.configdata.musicPlayer.type}&id=${this.configdata.musicPlayer.id}`
+        const response = await fetch(`https://api.injahow.cn/meting/?server=${this.configdata.musicPlayer.server}&type=${this.configdata.musicPlayer.type}&id=${this.configdata.musicPlayer.id}`
         );
         if (!response.ok) {
           throw new Error('网络请求失败');
         }
-        this.musicinfo = await response.json();
+        const data = await response.json();
+        this.musicinfo = data.map(song => ({
+          title: song.name,
+          author: song.artist,
+          url: song.url,
+          pic: song.pic,
+          lrc: song.lrc
+        }));
         this.musicinfoLoading = false;
       } catch (error) {
         console.error('请求失败:', error);
