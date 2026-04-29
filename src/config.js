@@ -152,7 +152,7 @@ const config = {
 
 	//项目卡片 其中 字段"show"控制初始卡片的text是否展开
 	projectcards: [
-		{ go: "🚀 前往", img: "/img/General Wallpaper/1407656.jpg", title: "NextChat", subtitle: "开源 AI 对话应用", text: "一个开源的 AI 聊天客户端，支持多模型、Markdown、插件与多端部署。", url: "https://example1.com", show: false },
+		{ go: "🚀 前往", img: "/img/General Wallpaper/1407656.jpg", title: "NextChat", subtitle: "开源 AI 对话应用", text: "一个开源的 AI 聊天客户端，支持多模型、Markdown、插件与多端部署。", url: "https://nextchat.thirty30.top/", show: false },
 		{ go: "🗂️ 前往", img: "/img/General Wallpaper/1407685.png", title: "Trent Shop", subtitle: "个人小店", text: "售卖自用软件、脚本与折腾成果。", url: "https://shop.trent30.org/", show: false },
 		{ go: "📝 前往", img: "/img/sunshine.jpg", title: "Project 3", subtitle: "3,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
 		{ go: "👍 前往", img: "/img/sunshine.jpg", title: "Project 4", subtitle: "4,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
