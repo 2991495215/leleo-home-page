@@ -158,8 +158,8 @@ const config = {
 		{ go: "📡 前往", img: "/img/General Wallpaper/compressed_images/337420.jpg", title: "Probe", subtitle: "服务器状态监控", text: "实时查看服务器在线状态、负载与资源占用。", url: "https://nz.trent30.com/", show: false },
 		{ go: "✉️ 前往", img: "/img/General Wallpaper/compressed_images/813527.jpg", title: "FreeMail", subtitle: "临时邮箱服务", text: "便捷获取临时邮箱，用于注册验证与邮件接收。", url: "https://freemail.trent30.org/", show: false },
 		{ go: "🎨 前往", img: "/img/General Wallpaper/compressed_images/906482.jpg", title: "GPT Image", subtitle: "AI 图片生成", text: "基于 AI 的图片生成工具，快速创建创意视觉内容。", url: "https://gpt-image.trent30.com/", show: false },
-		// { go: "💍 前往", img: "/img/sunshine.jpg", title: "Project 7", subtitle: "7,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
-		// { go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 8", subtitle: "8,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
+		{ go: "💍 前往", img: "/img/sunshine.jpg", title: "Project 7", subtitle: "7,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
+		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 8", subtitle: "8,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
 	],
 
 	statement: [],
