@@ -152,13 +152,13 @@ const config = {
 
 	//项目卡片 其中 字段"show"控制初始卡片的text是否展开
 	projectcards: [
-		{ go: "🚀 前往", img: "/img/General Wallpaper/compressed_images/1407656.jpg", title: "NextChat", subtitle: "AI 对话项目", text: "一个开源的 AI 聊天客户端，支持多模型、Markdown、插件与多端部署。", url: "https://nextchat.thirty30.top/", show: false },
-		{ go: "🗂️ 前往", img: "/img/General Wallpaper/compressed_images/1407685.png", title: "Trent Shop", subtitle: "个人小店", text: "售卖自用软件、脚本与折腾成果。", url: "https://shop.trent30.org/", show: false },
+		{ go: "🗂️ 前往", img: "/img/General Wallpaper/compressed_images/1407685.png", title: "Trent Shop", subtitle: "个人小店", text: "售卖自用软件、脚本与折腾成果", url: "https://shop.trent30.org/", show: false },
 		{ go: "📝 前往", img: "/img/General Wallpaper/compressed_images/320687.jpg", title: "Airport", subtitle: "网络优化方案", text: "跨越数字边界的全天候网络接入点", url: "https://vpn.trent30.com/", show: false },
-		{ go: "📡 前往", img: "/img/General Wallpaper/compressed_images/337420.jpg", title: "Probe", subtitle: "服务器状态监控", text: "实时查看服务器在线状态、负载与资源占用。", url: "https://nz.trent30.com/", show: false },
-		{ go: "✉️ 前往", img: "/img/General Wallpaper/compressed_images/813527.jpg", title: "FreeMail", subtitle: "临时邮箱服务", text: "便捷获取临时邮箱，用于注册验证与邮件接收。", url: "https://freemail.trent30.org/", show: false },
-		{ go: "🎨 前往", img: "/img/General Wallpaper/compressed_images/906482.jpg", title: "GPT Image", subtitle: "AI 图片生成", text: "基于 AI 的图片生成工具，快速创建创意视觉内容。", url: "https://gpt-image.trent30.com/", show: false },
-		{ go: "💍 前往", img: "/img/sunshine.jpg", title: "Project 7", subtitle: "7,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
+		{ go: "📡 前往", img: "/img/General Wallpaper/compressed_images/337420.jpg", title: "Probe", subtitle: "服务器状态监控", text: "实时查看服务器在线状态、负载与资源占用", url: "https://nz.trent30.com/", show: false },
+		{ go: "🔌 前往", img: "/img/General Wallpaper/compressed_images/1407656.jpg", title: "New API", subtitle: "API 聚合服务", text: "统一管理与转发多模型 API，方便接入不同 AI 服务", url: "https://newapi.trent30.com/", show: false },
+		{ go: "🚀 前往", img: "/img/General Wallpaper/compressed_images/35957.jpg", title: "NextChat", subtitle: "AI 对话项目", text: "一个开源的 AI 聊天客户端，支持多模型、Markdown、插件与多端部署", url: "https://nextchat.thirty30.top/", show: false },
+		{ go: "🎨 前往", img: "/img/General Wallpaper/compressed_images/906482.jpg", title: "GPT Image", subtitle: "AI 图片生成", text: "基于 AI 的图片生成工具，快速创建创意视觉内容", url: "https://gpt-image.trent30.com/", show: false },
+		{ go: "✉️ 前往", img: "/img/General Wallpaper/compressed_images/813527.jpg", title: "FreeMail", subtitle: "临时邮箱服务", text: "便捷获取临时邮箱，用于注册验证与邮件接收", url: "https://freemail.trent30.org/", show: false },
 		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 8", subtitle: "8,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
 	],
 

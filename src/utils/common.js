@@ -44,7 +44,7 @@ export function dataConsole(){
         |  .-----------------.  |  |     +---------+      | 
         |  |                 |  |  |     | -==----'|      | 
         |  |  I LOVE YOU!    |  |  |     |         |      | 
-        |  |  FROM %cleleo.top%c |  |  |/----|'---=    |      | 
+        |  |  FROM %ctrent30.com%c |  |  |/----|'---=    |      | 
         |  |  Copyright ©    |  |  |   ,/|==== ooo |      ; 
         |  |      ${new Date().getFullYear()}       |  |  |  // |(((( [33]|    ,"  
         |  ·-----------------'  |," .;'| |((((     |  ,"    
