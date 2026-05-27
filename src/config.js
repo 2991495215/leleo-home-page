@@ -49,17 +49,17 @@ const config = {
 	//极坐标图数据
 	polarChart: {
 		skills: ['子时 00:00-02:00', '丑时 02:00-04:00', '寅时 04:00-06:00', '卯时 06:00-08:00', '辰时 08:00-10:00', '巳时 10:00-12:00', '午时 12:00-14:00', '未时 14:00-16:00', '申时 16:00-18:00', '酉时 18:00-20:00', '戌时 20:00-22:00', '亥时 22:00-00:00'],
-		skillPoints: [90, 70, 20, 60, 20, 50, 80, 40, 50, 60, 70, 80],
+		skillPoints: [80, 70, 20, 60, 20, 50, 80, 40, 50, 60, 70, 80],
 	},
 
 	//社交按钮
 	socialPlatformIcons: [
-		// { icon: "mdi-github", link: "https://www.github.com/leleo886" },
-		{ icon: "mdi-email", link: "mailto:a2832893528@qq.com" },
-		{ icon: "mdi-qqchat", link: "https://qm.qq.com/q/AraDkhWLIs" },
-		{ icon: "mdi-wechat", link: "weixin://dl/chat?huangleihhh" },
-		// { icon: "mdi-youtube", link: "https://www.youtube.com" },
-		// { icon: "mdi-facebook", link: "https://www.facebook.com" }
+		// { icon: "mdi-github", link: "https://www.github.com/leleo886", tab: "wechat" },
+		{ icon: "mdi-email", link: "mailto:a2832893528@qq.com", tab: "email" },
+		{ icon: "mdi-qqchat", link: "https://qm.qq.com/q/AraDkhWLIs", tab: "qq" },
+		{ icon: "mdi-wechat", link: "weixin://dl/chat?huangleihhh", tab: "wechat" },
+		// { icon: "mdi-youtube", link: "https://www.youtube.com", tab: "wechat" },
+		// { icon: "mdi-facebook", link: "https://www.facebook.com", tab: "wechat" }
 	],
 
 	//打字机
@@ -72,6 +72,7 @@ const config = {
 
 	//音乐播放配置，采用MetingJS Api(https://github.com/metowolf/MetingJS)
 	musicPlayer: {
+		api: 'https://music.3e0.cn/',
 		server: 'tencent',  //服务提供商 --QQ音乐
 		type: 'playlist',   //歌单类型
 		id: '9677936501'  //歌单id ---> https://i.y.qq.com/n2/m/share/details/taoge.html?id=9677936501
@@ -160,13 +161,50 @@ const config = {
 		{ go: "🚀 前往", img: "/img/General Wallpaper/compressed_images/813527.jpg", title: "NextChat", subtitle: "AI 对话项目", text: "一个开源的 AI 聊天客户端，支持多模型、Markdown、插件与多端部署", url: "https://nextchat.thirty30.top/", show: false },
 		{ go: "🎨 前往", img: "/img/General Wallpaper/compressed_images/906482.jpg", title: "GPT Image", subtitle: "AI 图片生成", text: "基于 AI 的图片生成工具，快速创建创意视觉内容", url: "https://gpt-image.trent30.com/", show: false },
 		{ go: "✉️ 前往", img: "/img/General Wallpaper/compressed_images/1346366.png", title: "FreeMail", subtitle: "临时邮箱服务", text: "便捷获取临时邮箱，用于注册验证与邮件接收", url: "https://freemail.trent30.org/", show: false },
-		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 9", subtitle: "9,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
-		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 10", subtitle: "10,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
-		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 11", subtitle: "11,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
-		{ go: "🔍 前往", img: "/img/sunshine.jpg", title: "Project 12", subtitle: "12,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
+		{ go: "☁️ 前往", img: "/img/General Wallpaper/compressed_images/64111.jpg", title: "R2-Explorer", subtitle: "在线文件存储分享", text: "基于 Cloudflare R2 搭建的文件存储服务，10G免费容量，适合存放小文件，多设备文件分享", url: "https://r2.trent30.com/", show: false },
+		{ go: "🔍 前往", img: "/img/General Wallpaper/compressed_images/43056.jpg", title: "Project 10", subtitle: "10,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
+		{ go: "🔍 前往", img: "/img/General Wallpaper/compressed_images/87077.jpg", title: "Project 11", subtitle: "11,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
+		{ go: "🔍 前往", img: "/img/General Wallpaper/compressed_images/76071.jpg", title: "Project 12", subtitle: "12,000 miles of wonder", text: "If you see this line, I've managed to get your attention.", url: "https://thirty30.top/", show: false },
 	],
 
 	statement: [],
+
+	//联系方式数据
+	contactInfo: {
+		title: "联系方式",
+		groups: [
+			{
+				name: "QQ相关",
+				icon: "mdi-qqchat",
+				description: "无事无扰！！",
+				items: [
+					{ name: "三十", value: "2991495215", type: "qq", icon: "mdi-account", detail: "" },
+					{ name: "小黑耗子", value: "2795301864", type: "qq", icon: "mdi-account", detail: "" },
+					{ name: "AI绘画群", value: "568173857", type: "group", icon: "mdi-account-group", detail: "需审核，非__控勿入" },
+					{ name: "赛博丹炉讨论组", value: "828971018", type: "group", icon: "mdi-account-group", detail: "锁群" },
+					{ name: "AI前沿通知", value: "684836402", type: "group", icon: "mdi-account-group", detail: "暂不启用，有事私信" }
+				]
+			},
+			{
+				name: "邮箱相关",
+				icon: "mdi-email",
+				description: "常用的联系方式，有重要事情请发邮件联系！",
+				items: [
+					{ name: "QQ邮箱", value: "a2832893528@qq.com", type: "email", icon: "mdi-email", detail: "" },
+					{ name: "谷歌邮箱", value: "2991495215@gmail.com", type: "email", icon: "mdi-email", detail: "" }
+				]
+			},
+			{
+				name: "微信",
+				icon: "mdi-wechat",
+				description: "无事无扰！！",
+				items: [
+					{ name: "微信", value: "huangleihhh", type: "wechat", icon: "mdi-wechat", detail: "" },
+					{ name: "微信回复号", value: "ssLuoXiaoHeiShiMao", type: "wechat", icon: "mdi-wechat", detail: "" }
+				]
+			}
+		]
+	},
 }
 
 export default config

@@ -1,4 +1,4 @@
-<template>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<template>
     <v-container fluid class="pa-0 tab2">
       <v-tabs
           v-model="tab"
@@ -12,7 +12,7 @@
               :prepend-icon="item.icon"
               :text="item.text"
               :value="item.value"
-              class="text-none"
+              class="text-none cursor-target"
             ></v-tab>
           </template>
           
@@ -27,6 +27,7 @@
                                     <template v-slot:activator="{ props }">
                                         <v-btn variant="tonal"
                                         v-bind="props" :density="smAndDown?'compact':'default'"
+                                        class="cursor-target"
                                         >
                                         <v-icon>mdi-arrow-down</v-icon>
                                         </v-btn>
@@ -36,6 +37,7 @@
                                             v-for="(item, index) in staticType"
                                             :key="index"
                                             @click="switchType(item.type,'static')"
+                                            class="cursor-target"
                                         >
                                             {{ item.name }}
                                         </v-btn>
@@ -47,7 +49,7 @@
                         <v-row class="scroll-container">
                             <v-col :cols="type == 'mobile' ? 6:12" :sm="type == 'mobile' ? 4:6" :md="type == 'mobile' ? 3:4" v-for="item in paginatedPICItems" :key="item.preview" class="d-flex justify-center">
                                 <v-img rounded="lg" @click="radios = item" style="cursor: pointer"
-                                :class="{'selected-item':radios === item }"
+                                :class="{'selected-item':radios === item, 'cursor-target': true}"
                                 :max-width="smAndDown ? (type == 'mobile' ? 100 : 200) : (type == 'mobile' ? 160 : 250)"
                                 :max-height="smAndDown ? (type == 'mobile' ? 170 : 120) : (type == 'mobile' ? 272 : 150)"
                                 cover
@@ -74,6 +76,7 @@
                     :length="totalPICPages"
                     @input="updatePICPage"
                     :density="smAndDown? 'compact':'default'"
+                    class="cursor-target"
                     ></v-pagination>
                 </div>
                 <div v-if="item.value === 'tab-2'">
@@ -85,6 +88,7 @@
                                     <template v-slot:activator="{ props }">
                                         <v-btn variant="tonal" :density="smAndDown?'compact':'default'"
                                         v-bind="props"
+                                        class="cursor-target"
                                         >
                                         <v-icon>mdi-arrow-down</v-icon>
                                         </v-btn>
@@ -94,6 +98,7 @@
                                             v-for="(item, index) in staticType"
                                             :key="index"
                                             @click="switchType(item.type,'dynamic')"
+                                            class="cursor-target"
                                         >
                                             {{ item.name }}
                                         </v-btn>
@@ -103,7 +108,7 @@
                         </template>
                         <v-row class="scroll-container">
                             <v-col :cols="type == 'mobile' ? 6:12" :sm="type == 'mobile' ? 4:6" :md="type == 'mobile' ? 3:4" v-for="item in paginatedVDItems" :key="item.preview" class="d-flex justify-center">
-                                <div class="video-container" @click="radios = item" style="cursor: pointer">
+                                <div class="video-container cursor-target" @click="radios = item" style="cursor: pointer">
                                     <!-- 加载提示 -->
                                     <div v-if="!item.loaded" class="loading-spinner">
                                         <v-progress-circular indeterminate></v-progress-circular>
@@ -127,6 +132,7 @@
                     :length="totalVDPages"
                     @input="updateVDPage"
                     :density="smAndDown? 'compact':'default'"
+                    class="cursor-target"
                     ></v-pagination>
                 </div>
             </v-tabs-window-item>
@@ -135,9 +141,9 @@
          <div style="text-align: center;font-size: 12px;"><span>不同壁纸在相应设备下响应</span></div>
     </v-container>
     <div class="d-flex justify-center mt-3">
-        <v-btn :loading="loading1" variant="tonal" class="ma-2" @click="redefault()">恢复</v-btn>
-        <v-btn :loading="loading3" variant="tonal" class="ma-2" @click="cancel()">取消</v-btn>
-        <v-btn :loading="loading2" variant="tonal" class="ma-2" @click="submitdata()">确认</v-btn>
+        <v-btn :loading="loading1" variant="tonal" class="ma-2 cursor-target" @click="redefault()">恢复</v-btn>
+        <v-btn :loading="loading3" variant="tonal" class="ma-2 cursor-target" @click="cancel()">取消</v-btn>
+        <v-btn :loading="loading2" variant="tonal" class="ma-2 cursor-target" @click="submitdata()">确认</v-btn>
     </div>
 
     <v-snackbar

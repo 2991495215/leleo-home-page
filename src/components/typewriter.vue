@@ -17,7 +17,7 @@ onMounted(() => {
     }
     new (TypeIt)(text.value, {
         strings: configdata.typeWriterStrings,
-        cursorChar: "<span class='cursorChar' style='font-size: 26px;color: var(--leleo-vcard-color);'>|<span>",//用于光标的字符。HTML也可以
+        cursorChar: "<span class='cursorChar' style='font-size: 26px;color: var(--leleo-vcard-color);'>|</span>",//用于光标的字符。HTML也可以
         speed: 150,
         lifeLike: true,// 使打字速度不规则
         cursor: true,//在字符串末尾显示闪烁的光标

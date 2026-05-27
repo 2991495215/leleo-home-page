@@ -54,6 +54,14 @@ export default {
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 20
+            }
+          },
           plugins: {
             legend: {
               display: false,
@@ -95,6 +103,8 @@ export default {
                 color: 'rgba(0, 0, 0, 0.2)',
                 lineWidth: 1,
               },
+              beginAtZero: true,
+              max: 90,
             },
           },
           animation: {

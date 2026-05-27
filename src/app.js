@@ -5,6 +5,7 @@ import tab2 from './components/tabs/tab2.vue';
 import tab3 from './components/tabs/tab3.vue';
 import loader from './components/loader.vue';
 import polarchart from './components/polarchart.vue';
+import TargetCursor from './components/ui/TargetCursor.vue';
 import config from './config.js';
 import { getCookie } from './utils/cookieUtils.js';
 import { setMeta,getFormattedTime,getFormattedDate,dataConsole } from './utils/common.js';
@@ -12,7 +13,7 @@ import { useDisplay } from 'vuetify'
 
 export default {
   components: {
-    tab1,tab2,tab3,loader,homeright,typewriter,polarchart
+    tab1,tab2,tab3,loader,homeright,typewriter,polarchart,TargetCursor
   },
   setup() {
     const { xs,sm,md } = useDisplay();
@@ -27,6 +28,26 @@ export default {
       configdata: config,
       dialog1: false,
       dialog2: false,
+      dialog3: false,
+      contactInfo: null,
+      contactTab: 'email',
+      contactTabs: [
+        {
+          icon: 'mdi-email',
+          text: '邮箱',
+          value: 'email',
+        },
+        {
+          icon: 'mdi-qqchat',
+          text: 'QQ',
+          value: 'qq',
+        },
+        {
+          icon: 'mdi-wechat',
+          text: '微信',
+          value: 'wechat',
+        },
+      ],
       personalizedtags: null,
       videosrc: '',
       ismusicplayer: false,
@@ -76,6 +97,7 @@ export default {
     }
     this.projectcards = this.configdata.projectcards;this.socialPlatformIcons = this.configdata.socialPlatformIcons;
     this.personalizedtags = this.configdata.tags;
+    this.contactInfo = this.configdata.contactInfo;
     this.isloading = true;
     let imageurl = "";
     this.dataConsole();
@@ -181,7 +203,7 @@ export default {
 
   computed: {
     currentSong() {
-      return this.musicinfo[this.playlistIndex];
+      return this.musicinfo?.[this.playlistIndex];
     },
     audioPlayer() {
       return this.$refs.audioPlayer;
@@ -265,23 +287,34 @@ export default {
     
     async getMusicInfo(){
       this.musicinfoLoading = true;
+      const musicApi = this.configdata.musicPlayer.api || 'https://music.3e0.cn/';
+      const params = new URLSearchParams({
+        server: this.configdata.musicPlayer.server,
+        type: this.configdata.musicPlayer.type,
+        id: this.configdata.musicPlayer.id,
+      });
       try {
-        const response = await fetch(`https://api.injahow.cn/meting/?server=${this.configdata.musicPlayer.server}&type=${this.configdata.musicPlayer.type}&id=${this.configdata.musicPlayer.id}`
-        );
+        const response = await fetch(`${musicApi}?${params.toString()}`);
         if (!response.ok) {
           throw new Error('网络请求失败');
         }
         const data = await response.json();
-        this.musicinfo = data.map(song => ({
+        const songs = Array.isArray(data) ? data : data.value;
+        if (!Array.isArray(songs)) {
+          throw new Error(data?.message || '音乐数据格式错误');
+        }
+        this.musicinfo = songs.map(song => ({
           title: song.name,
           author: song.artist,
           url: song.url,
           pic: song.pic,
           lrc: song.lrc
         }));
-        this.musicinfoLoading = false;
       } catch (error) {
         console.error('请求失败:', error);
+        this.musicinfo = [];
+      } finally {
+        this.musicinfoLoading = false;
       }
       
     },
@@ -294,6 +327,9 @@ export default {
     },
 
     togglePlay() {
+      if (this.musicinfoLoading || !this.currentSong) {
+        return;
+      }
       if (!this.isPlaying) {
         this.audioPlayer.play();
         this.isVdMuted = true;
@@ -304,14 +340,23 @@ export default {
       this.isPlaying = !this.musicinfoLoading && !this.isPlaying;
     },
     previousTrack() {
+      if (!this.musicinfo?.length) {
+        return;
+      }
       this.playlistIndex = this.playlistIndex > 0 ? this.playlistIndex - 1 : this.musicinfo.length - 1;
       this.updateAudio();
     },
     nextTrack() {
+      if (!this.musicinfo?.length) {
+        return;
+      }
       this.playlistIndex = this.playlistIndex < this.musicinfo.length - 1 ? this.playlistIndex + 1 : 0;
       this.updateAudio();
     },
     updateAudio() {
+      if (!this.currentSong) {
+        return;
+      }
       this.audioPlayer.src = this.currentSong.url;
       this.$refs.audiotitle.innerText = this.currentSong.title;
       this.$refs.audioauthor.innerText = this.currentSong.author;
@@ -341,6 +386,47 @@ export default {
     },
     collapseSwitch() {
       this.isExpanded = false;
+    },
+    copyToClipboard(text) {
+      navigator.clipboard.writeText(text).catch(err => {
+        console.error('复制失败:', err);
+      });
+    },
+    handleContactClick(item) {
+      this.copyToClipboard(item.value);
+    },
+    openContactLink(item) {
+      if (item.type === 'qq') {
+        window.open(`tencent://message/?uin=${item.value}&Site=&Menu=yes`, '_blank');
+      } else if (item.type === 'group') {
+        window.open(`mqqapi://card/show_pslcard?src_type=internal&version=1&uin=${item.value}&card_type=group&source=qrcode`, '_blank');
+      } else if (item.type === 'email') {
+        window.open(`mailto:${item.value}`, '_blank');
+      } else if (item.type === 'wechat') {
+        window.open(`weixin://dl/chat?${item.value}`, '_blank');
+      } else if (item.type === 'github') {
+        window.open(`https://github.com/${item.value}`, '_blank');
+      } else {
+        this.copyToClipboard(item.value);
+      }
+    },
+    openContactDialog(tab = 'email') {
+      this.contactTab = tab;
+      this.dialog3 = true;
+    },
+    getContactsByTab(tab) {
+      if (!this.contactInfo || !this.contactInfo.groups) return { items: [], description: '' };
+      
+      const groupMap = {
+        'qq': 'QQ相关',
+        'email': '邮箱相关',
+        'wechat': '微信'
+      };
+      
+      const groupName = groupMap[tab];
+      const group = this.contactInfo.groups.find(g => g.name === groupName);
+      
+      return group ? { items: group.items, description: group.description } : { items: [], description: '' };
     },
   }
 };

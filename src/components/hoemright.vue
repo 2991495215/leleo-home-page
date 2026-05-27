@@ -1,57 +1,59 @@
 <template>
       <div>
         <div>
-          <div :style="xs||sm?{'display':'none'}:{'font-size':'4rem'}" class="leleo-left-welcome">{{ configdata.welcometitle }}</div>
+          <div :style="xs||sm?{'display':'none'}:{'font-size':'4rem'}" class="leleo-left-welcome"><span class="cursor-target">{{ configdata.welcometitle }}</span></div>
         </div>
         <div>
-          <v-row align="center">
+            <v-row align="center">
             <v-col cols="12" md="8">
-				<v-text-field class="v-card"
-					:style="xs||sm?{'display':'none'}:{}"
-					v-model="searchQuery"
-					placeholder="搜索..."
-					variant="outlined"
-					rounded
-					hide-details="true"
-					@keyup.enter="performSearch"
-					>
-					<template v-slot:prepend-inner>
-						<v-menu>
-							<template v-slot:activator="{ props }">
-							<v-btn
-								variant="text"
-								v-bind="props"
-								class="engine-btn"
-							>
-								{{ selectedEngine.title }}
-								<v-icon icon="mdi-chevron-down"></v-icon>
-							</v-btn>
-							</template>
-							<v-list class="glass-list">
-								<v-list-item
-									v-for="engine in searchEngines"
-									:key="engine.value"
-									@click="selectedEngine = engine"
-									density="compact"
-								>
-									{{ engine.title }}
-								</v-list-item>
-							</v-list>
-						</v-menu>
-					</template>
-
-					<template v-slot:append-inner>
-						<v-btn
-						:icon="isUrl ? 'mdi-earth' : 'mdi-magnify'"
+				<v-text-field class="v-card cursor-target"
+				:style="xs||sm?{'display':'none'}:{}"
+				v-model="searchQuery"
+				placeholder="搜索..."
+				variant="outlined"
+				rounded
+				hide-details="true"
+				@keyup.enter="performSearch"
+				>
+				<template v-slot:prepend-inner>
+					<v-menu>
+					<template v-slot:activator="{ props }">
+					<v-btn
 						variant="text"
-						@click="performSearch"
-						></v-btn>
+						v-bind="props"
+						class="engine-btn cursor-target"
+					>
+						{{ selectedEngine.title }}
+						<v-icon icon="mdi-chevron-down"></v-icon>
+					</v-btn>
 					</template>
-					</v-text-field>
-            	<typewriter class="ma-3 d-flex align-center justify-center" style="min-height: 200px;"></typewriter>
+					<v-list class="glass-list">
+						<v-list-item
+						v-for="engine in searchEngines"
+						:key="engine.value"
+						@click="selectedEngine = engine"
+						density="compact"
+						class="cursor-target"
+						>
+						{{ engine.title }}
+						</v-list-item>
+					</v-list>
+					</v-menu>
+				</template>
+
+				<template v-slot:append-inner>
+					<v-btn
+					:icon="isUrl ? 'mdi-earth' : 'mdi-magnify'"
+					variant="text"
+					@click="performSearch"
+					class="cursor-target"
+					></v-btn>
+				</template>
+				</v-text-field>
+            	<typewriter class="ma-3 d-flex align-center justify-center cursor-target" style="min-height: 200px;"></typewriter>
             </v-col>
             <v-col cols="12" md="4" align="center">
-              <v-card class="ma-3" hover >
+              <v-card class="ma-3 cursor-target" hover >
                   <template v-slot:title >
                     <span class="leleo-card-title clock-font">{{formattedTime}}</span>
                   </template>
@@ -63,7 +65,7 @@
             </v-col>
           </v-row>
           
-          <v-chip class="mt-3 ml-3" prepend-icon="mdi-webhook"  size="large" style="color: var(--leleo-vcard-color);">
+          <v-chip class="mt-3 ml-3 cursor-target" prepend-icon="mdi-webhook"  size="large" style="color: var(--leleo-vcard-color);">
             项目
           </v-chip>
           <v-container>
@@ -73,31 +75,33 @@
                 cols="6"
                 md="4"
                 lg="3"
-                :style="xs?{'padding': '6px'}:{}"
+                :style="xs?{'padding':'6px'}:{}"
               >
-                <v-card class="">
+                <v-card class="project-card cursor-target">
                   <v-img
                     aspect-ratio="1.7778"
                     :src= item.img
                     cover
                     :style="{ opacity: 0.8 }"
                   ></v-img>
-                  <v-card-title :style="xs?{'font-size': '0.9rem','padding': '0.15rem 0.5rem'}:{'font-size': '1.1rem','padding':'0.2rem 0.8rem'}">
+                  <v-card-title :style="xs?{'font-size':'0.9rem','padding':'0.15rem 0.5rem'}:{'font-size':'1.1rem','padding':'0.2rem 0.8rem'}">
                     {{item.title}}
                   </v-card-title>
-                  <v-card-subtitle :style="xs?{'font-size': '0.6rem','padding': '0.1rem 0.5rem'}:{'font-size': '0.8rem','padding':'0.15rem 0.6rem'}">
+                  <v-card-subtitle :style="xs?{'font-size':'0.6rem','padding':'0.1rem 0.5rem'}:{'font-size':'0.8rem','padding':'0.15rem 0.6rem'}">
                     {{ item.subtitle }}
                   </v-card-subtitle>
 
-                  <v-card-actions :style="xs||sm||md?{'padding': '0','min-height': '0','height':'2.5rem'}:{'min-height': '0','height':'2.8rem'}">
+                  <v-card-actions :style="xs||sm||md?{'padding':'0','min-height':'0','height':'2.5rem'}:{'min-height':'0','height':'2.8rem'}">
                     <v-btn :href="item.url"
                     target="_blank"
                       :text= "item.go"
+                      class="cursor-target"
                     ></v-btn>
                     <v-spacer></v-spacer>
                     <v-btn
                       :icon="item.show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
                       @click="item.show = !item.show;projectcardsShow(key);"
+                      class="cursor-target"
                     ></v-btn>
                   </v-card-actions>
                   <v-expand-transition>
@@ -210,8 +214,17 @@ export default {
 .glass-list {
 	background: transparent !important;
 	backdrop-filter: blur(var(--leleo-blur));
-	border-radius: 5%;
+	border-radius: 16px;
 	color: var(--leleo-vcard-color);
 	overflow: hidden;
+}
+.project-card {
+	transition: transform 0.22s ease, box-shadow 0.22s ease;
+	will-change: transform;
+}
+.project-card:hover {
+	transform: scale(0.985);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+	z-index: 2;
 }
 </style>

@@ -1,4 +1,4 @@
-<template>
+﻿﻿﻿﻿﻿﻿﻿﻿<template>
     <div v-if="!lyricsloaded || audioLoading" class="loading-spinner">
             <v-progress-circular indeterminate></v-progress-circular>
     </div>
@@ -12,11 +12,12 @@
               rounded="0"
               :image="currentSong.pic"
               :size="xs?48:64"
+              class="cursor-target"
             ></v-avatar>
-            <v-btn icon @click="togglePlay" :size="xs?28:38" variant= 'tonal' class="ml-1">
+            <v-btn icon @click="togglePlay" :size="xs?28:38" variant= 'tonal' class="ml-1 cursor-target">
               <v-icon>{{ isPlaying ? 'mdi-pause' : 'mdi-play' }}</v-icon>
             </v-btn>
-            <v-btn icon @click="nextTrack" :size="xs?28:38" variant= 'tonal' class="ml-1">
+            <v-btn icon @click="nextTrack" :size="xs?28:38" variant= 'tonal' class="ml-1 cursor-target">
               <v-icon>mdi-skip-next</v-icon>
             </v-btn>
             <v-slider style="margin-bottom: -22px;padding: 0;"
@@ -28,6 +29,7 @@
                   @update:modelValue="seek"
                   @end="onSliderEnd"
                   @strat="onSliderStart"
+                  class="cursor-target"
               ></v-slider>
             
 
@@ -58,7 +60,7 @@
           v-for="(song, index) in musicinfo"
           :key="index"
           @click="play(index)"
-          :class="{ 'active-song': index === currentIndex }"
+          :class="{ 'active-song': index === currentIndex, 'cursor-target': true }"
           ref="songItems"
         >
           <v-list-item-content class="d-flex justify-space-between">

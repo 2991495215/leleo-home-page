@@ -8,6 +8,7 @@
                 @click="selectcolor='themecolor';colordialog = true"
                 readonly
                 variant="outlined"
+                class="cursor-target"
             ></v-text-field>
             <v-text-field
                 v-model="color.welcometitlecolor"
@@ -15,9 +16,10 @@
                 @click="selectcolor='welcometitlecolor';colordialog = true"
                 readonly
                 variant="outlined"
+                class="cursor-target"
             ></v-text-field>
             <v-slider
-                class="ml-5 mr-8"
+                class="ml-5 mr-8 cursor-target"
                 label="背景亮度"
                 color=var(--leleo-vcard-color)
                 :max="100"
@@ -28,7 +30,7 @@
                 thumb-label="always"
             ></v-slider>
             <v-slider
-                class="ml-5 mr-8"
+                class="ml-5 mr-8 cursor-target"
                 label="模糊度"
                 color=var(--leleo-vcard-color)
                 :max="20"
@@ -40,20 +42,21 @@
             ></v-slider>
             
             <div style="display: flex;justify-content: center;align-items: center;">
-                <v-btn :loading="loading1" variant="tonal" class="ma-2" @click="redefault()">恢复</v-btn>
-                <v-btn variant="tonal" class="ma-2" @click="cancel()">取消</v-btn>
-                <v-btn :loading="loading2" variant="tonal" class="ma-2" @click="submitdata()">确认</v-btn>
+                <v-btn :loading="loading1" variant="tonal" class="ma-2 cursor-target" @click="redefault()">恢复</v-btn>
+                <v-btn variant="tonal" class="ma-2 cursor-target" @click="cancel()">取消</v-btn>
+                <v-btn :loading="loading2" variant="tonal" class="ma-2 cursor-target" @click="submitdata()">确认</v-btn>
             </div>
      
             <v-dialog
                 v-model="colordialog"
                 width="auto"
                 >
-                <v-card title="颜色选择器">                   
+                <v-card title="颜色选择器" class="cursor-target">                   
                     <div class="d-flex flex-column">
                         <v-color-picker
                             v-model="color[selectcolor]"
                             v-model:mode="mode"
+                            class="cursor-target"
                         ></v-color-picker>
                     </div>
                     <v-card-actions>
@@ -62,6 +65,7 @@
                         text="确认"
                         variant="elevated"
                         @click="colordialog = false"
+                        class="cursor-target"
                     ></v-btn>
                     </v-card-actions>
                 </v-card>
