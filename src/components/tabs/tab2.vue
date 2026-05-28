@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<template>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<template>
     <v-container fluid class="pa-0 tab2">
       <v-tabs
           v-model="tab"
@@ -49,7 +49,7 @@
                         <v-row class="scroll-container">
                             <v-col :cols="type == 'mobile' ? 6:12" :sm="type == 'mobile' ? 4:6" :md="type == 'mobile' ? 3:4" v-for="item in paginatedPICItems" :key="item.preview" class="d-flex justify-center">
                                 <v-img rounded="lg" @click="radios = item" style="cursor: pointer"
-                                :class="{'selected-item':radios === item, 'cursor-target': true}"
+                                :class="{'wallpaper-item': true, 'selected-item':radios === item, 'cursor-target': true}"
                                 :max-width="smAndDown ? (type == 'mobile' ? 100 : 200) : (type == 'mobile' ? 160 : 250)"
                                 :max-height="smAndDown ? (type == 'mobile' ? 170 : 120) : (type == 'mobile' ? 272 : 150)"
                                 cover
@@ -115,7 +115,7 @@
                                     </div>
                                     <video autoplay loop muted 
                                         @click="item=radios"
-                                        :class="{'selected-item':radios === item }"
+                                        :class="{'wallpaper-item': true, 'selected-item':radios === item }"
                                         :style="type == 'mobile'?(smAndDown ?{width: '100px',height:'170px'}:{width: '160px',height:'272px'}):(smAndDown ?{width: '200px'}:{width: '250px'})"
                                         style="object-fit: cover;"
                                         rounded="lg" @loadeddata="item.loaded = true"
@@ -369,8 +369,15 @@ video{
     box-shadow: 0 0 10px rgba(25, 118, 210, 0.5),;
 }
 
+.wallpaper-item {
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
 .selected-item {
-  border-color: var(--leleo-vcard-color); /* 选中时的边框颜色 */
-  box-shadow: 0 0 10px var(--leleo-vcard-color); /* 选中时的阴影 */
+  border-color: var(--leleo-vcard-color);
+  box-shadow: 0 0 10px var(--leleo-vcard-color);
+  filter: brightness(1.08);
 }
 </style>
