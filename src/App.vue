@@ -117,7 +117,6 @@
     <v-dialog
         v-model="dialog1"
         width="1000"
-        height="700"
       >
       <v-card elevation="3" style="backdrop-filter: blur(10px);">
         <v-tabs
@@ -282,9 +281,6 @@
                   density="comfortable" 
                   class="contact-alert bg-opacity-30 cursor-target"
                 >
-                  <template v-slot:prepend>
-                    <v-icon :icon="getContactsByTab(item.value).items[0]?.icon || 'mdi-information'"></v-icon>
-                  </template>
                   {{ getContactsByTab(item.value).description }}
                 </v-alert>
               </div>
