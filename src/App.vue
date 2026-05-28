@@ -298,7 +298,6 @@
                   <v-list-item-title class="font-weight-bold">{{ contact.name }}</v-list-item-title>
                   <v-list-item-subtitle class="contact-subtitle">
                     <div class="contact-info-row">
-                      <span class="contact-value">{{ contact.value }}</span>
                       <span v-if="contact.detail" class="contact-detail text-caption opacity-60">{{ contact.detail }}</span>
                     </div>
                   </v-list-item-subtitle>
