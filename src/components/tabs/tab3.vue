@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿<template>
+﻿﻿﻿﻿﻿﻿﻿<template>
     <div v-if="!lyricsloaded || audioLoading" class="loading-spinner">
             <v-progress-circular indeterminate></v-progress-circular>
     </div>
@@ -269,7 +269,7 @@ export default {
     this.duration = this.audioPlayer.duration;
     this.scrollToCurrentSong();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.stopLyricUpdate(); // 清除定时器
     this.audioPlayer.removeEventListener('timeupdate', this.updateTime);
     this.audioPlayer.removeEventListener('loadedmetadata', this.updateDuration);

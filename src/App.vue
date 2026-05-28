@@ -18,8 +18,6 @@
         inset
         :style="xs?{'transform':'scale(0.6) translateX(15%)'}:{}"
         class="floating-switch"
-        @mouseover="expandSwitch"
-        @mouseleave="collapseSwitch"
       ></v-switch>
     </div>
     
@@ -71,18 +69,18 @@
                 </v-card>
 
                 <div class="leleo-left-chart cursor-target">
-                    <polarchart :style="xs||sm?{'height':'240px'}:{'height':'300px'}"/>
+                    <polarchart class="leleo-polar-chart"/>
                 </div>
 
                 <v-container class="leleo-left-socialIconsContainer">
                     <v-row align="center" justify="center">
                     <v-col class="pa-1" cols="auto" v-for="(item, index) in socialPlatformIcons">
-                        <v-btn :size="xs?25:33" variant="tonal" color="var(--leleo-vcard-color)"
+                        <v-btn :size="xs?30:38" variant="tonal" color="var(--leleo-vcard-color)"
                         class="ma-1 leleo-social-bticon cursor-target"
                         icon
                         @click="openContactDialog(['email', 'qq', 'wechat'][index] || 'email')"
                         >
-                    <v-icon :icon=item.icon :size="xs?20:25" class="social-bticon-icon"></v-icon></v-btn>
+                    <v-icon :icon=item.icon :size="xs?23:28" class="social-bticon-icon"></v-icon></v-btn>
                     </v-col>
                     </v-row>
 
@@ -119,7 +117,7 @@
     <v-dialog
         v-model="dialog1"
         width="1000"
-        heihght="700"
+        height="700"
       >
       <v-card elevation="3" style="backdrop-filter: blur(10px);">
         <v-tabs
@@ -164,7 +162,7 @@
       <v-dialog
         v-model="dialog2"
         width="700"
-        heihght="500"
+        height="500"
       >
       <v-card class="ma-3 pa-2" hover
           variant="tonal"
@@ -246,7 +244,7 @@
             </v-card>
 
             <p class="ma-6">
-                <span v-for="item in configdata.statement">
+                <span v-for="item in configdata.statement" :key="item">
                   {{ item }}<br>
                 </span>
             </p>
@@ -257,74 +255,82 @@
     <v-dialog
       v-model="dialog3"
       width="1000"
+      class="contact-dialog"
     >
-      <v-card elevation="3" class="bg-opacity-20" style="backdrop-filter: blur(10px);">
+      <v-card elevation="3" class="contact-card" style="backdrop-filter: blur(10px);">
         <v-tabs
           v-model="contactTab"
+          :items="contactTabs"
           align-tabs="center"
           height="60"
           slider-color=var(--leleo-vcard-color)
         >
-          <v-tab prepend-icon="mdi-email" text="邮箱" value="email" class="text-none cursor-target"></v-tab>
-          <v-tab prepend-icon="mdi-qqchat" text="QQ" value="qq" class="text-none cursor-target"></v-tab>
-          <v-tab prepend-icon="mdi-wechat" text="微信" value="wechat" class="text-none cursor-target"></v-tab>
+          <template v-slot:tab="{ item }">
+            <v-tab
+              :prepend-icon="item.icon"
+              :text="item.text"
+              :value="item.value"
+              class="text-none cursor-target"
+            ></v-tab>
+          </template>
+
+          <template v-slot:item="{ item }">
+            <v-tabs-window-item :value="item.value" class="contact-panel pa-4">
+              <div class="mb-4" v-if="getContactsByTab(item.value).description">
+                <v-alert 
+                  variant="tonal" 
+                  density="comfortable" 
+                  class="contact-alert bg-opacity-30 cursor-target"
+                >
+                  <template v-slot:prepend>
+                    <v-icon :icon="getContactsByTab(item.value).items[0]?.icon || 'mdi-information'"></v-icon>
+                  </template>
+                  {{ getContactsByTab(item.value).description }}
+                </v-alert>
+              </div>
+              <v-list density="comfortable" class="bg-transparent">
+                <v-list-item 
+                  v-for="(contact, index) in getContactsByTab(item.value).items" 
+                  :key="index" 
+                  @click="handleContactClick(contact)" 
+                  class="contact-list-item bg-transparent cursor-target"
+                  :ripple="true"
+                >
+                  <template v-slot:prepend>
+                    <v-icon :icon="contact.icon" color="var(--leleo-vcard-color)"></v-icon>
+                  </template>
+                  <v-list-item-title class="font-weight-bold">{{ contact.name }}</v-list-item-title>
+                  <v-list-item-subtitle class="contact-subtitle">
+                    <div class="contact-info-row">
+                      <span class="contact-value">{{ contact.value }}</span>
+                      <span v-if="contact.detail" class="contact-detail text-caption opacity-60">{{ contact.detail }}</span>
+                    </div>
+                  </v-list-item-subtitle>
+                  <template v-slot:append>
+                    <v-btn 
+                      icon 
+                      variant="text" 
+                      color="var(--leleo-vcard-color)"
+                      @click.stop="copyToClipboard(contact.value)"
+                      class="mr-1 cursor-target"
+                    >
+                      <v-icon>mdi-content-copy</v-icon>
+                    </v-btn>
+                    <v-btn 
+                      icon 
+                      variant="text" 
+                      color="var(--leleo-vcard-color)"
+                      @click.stop="openContactLink(contact)"
+                      class="cursor-target"
+                    >
+                      <v-icon>mdi-open-in-new</v-icon>
+                    </v-btn>
+                  </template>
+                </v-list-item>
+              </v-list>
+            </v-tabs-window-item>
+          </template>
         </v-tabs>
-        <v-tabs-window v-model="contactTab">
-          <v-tabs-window-item v-for="item in ['email', 'qq', 'wechat']" :key="item" :value="item" class="pa-4">
-            <div class="mb-4" v-if="getContactsByTab(item).description">
-              <v-alert 
-                variant="tonal" 
-                density="comfortable" 
-                class="bg-opacity-30 cursor-target"
-              >
-                <template v-slot:prepend>
-                  <v-icon :icon="getContactsByTab(item).items[0]?.icon || 'mdi-information'"></v-icon>
-                </template>
-                {{ getContactsByTab(item).description }}
-              </v-alert>
-            </div>
-            <v-list density="comfortable" class="bg-transparent">
-              <v-list-item 
-                v-for="(contact, index) in getContactsByTab(item).items" 
-                :key="index" 
-                @click="handleContactClick(contact)" 
-                class="bg-transparent cursor-target"
-                :ripple="true"
-              >
-                <template v-slot:prepend>
-                  <v-icon :icon="contact.icon" color="var(--leleo-vcard-color)"></v-icon>
-                </template>
-                <v-list-item-title class="font-weight-bold">{{ contact.name }}</v-list-item-title>
-                <v-list-item-subtitle>
-                  <div class="d-flex align-center">
-                    <span class="mr-2">{{ contact.value }}</span>
-                    <span v-if="contact.detail" class="text-caption opacity-60">{{ contact.detail }}</span>
-                  </div>
-                </v-list-item-subtitle>
-                <template v-slot:append>
-                  <v-btn 
-                    icon 
-                    variant="text" 
-                    color="var(--leleo-vcard-color)"
-                    @click.stop="copyToClipboard(contact.value)"
-                    class="mr-1 cursor-target"
-                  >
-                    <v-icon>mdi-content-copy</v-icon>
-                  </v-btn>
-                  <v-btn 
-                    icon 
-                    variant="text" 
-                    color="var(--leleo-vcard-color)"
-                    @click.stop="openContactLink(contact)"
-                    class="cursor-target"
-                  >
-                    <v-icon>mdi-open-in-new</v-icon>
-                  </v-btn>
-                </template>
-              </v-list-item>
-            </v-list>
-          </v-tabs-window-item>
-        </v-tabs-window>
       </v-card>
     </v-dialog>
     <TargetCursor />
@@ -337,7 +343,23 @@
   @import url(/css/mobile.less);
 
   .leleo-left-chart {
-    padding: 10px;
+    padding: 6px;
+    width: 255px;
+    height: 255px;
+    max-width: 82vw;
+    margin: 0 auto;
+  }
+
+  .leleo-polar-chart {
+    display: block;
     width: 100%;
+    height: 100%;
+  }
+
+  @media (min-width: 960px) {
+    .leleo-left-chart {
+      width: 285px;
+      height: 285px;
+    }
   }
 </style>

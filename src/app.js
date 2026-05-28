@@ -1,5 +1,4 @@
 import homeright from '../src/components/hoemright.vue';
-import typewriter from './components/typewriter.vue';
 import tab1 from './components/tabs/tab1.vue';
 import tab2 from './components/tabs/tab2.vue';
 import tab3 from './components/tabs/tab3.vue';
@@ -13,7 +12,7 @@ import { useDisplay } from 'vuetify'
 
 export default {
   components: {
-    tab1,tab2,tab3,loader,homeright,typewriter,polarchart,TargetCursor
+    tab1,tab2,tab3,loader,homeright,polarchart,TargetCursor
   },
   setup() {
     const { xs,sm,md } = useDisplay();
@@ -58,7 +57,6 @@ export default {
       musicinfoLoading:false,
       lyrics:{},
       socialPlatformIcons: null,
-      isExpanded: false,
       stackicons:[
         {icon:"mdi-vuejs",color:"green", model: false,tip: 'vue'},
         {icon:"mdi-language-javascript",color:"#CAD300", model: false,tip: 'javascript'},
@@ -108,8 +106,8 @@ export default {
     //异步等待背景壁纸包括视频壁纸加载完成后再显示页面
     const loadImage = () => {
         const imageUrls = [
-          config.avatar,
-          ...config.projectcards.map(item => item.img)
+          this.configdata.avatar,
+          ...this.configdata.projectcards.map(item => item.img)
         ];
         return new Promise((resolve, reject) => {
           const imagePromises = imageUrls.map((url) => {
@@ -170,8 +168,8 @@ export default {
       this.setupAudioListener();  //设置 ended 事件监听器，当歌曲播放结束时自动调用 nextTrack 方法。
   },
 
-  beforeDestroy() {     //在组件销毁前移除事件监听器，防止内存泄漏。
-    this.$refs.audioPlayer.removeEventListener('ended',  this.nextTrack);
+  beforeUnmount() {     //在组件销毁前移除事件监听器，防止内存泄漏。
+    this.$refs.audioPlayer?.removeEventListener('ended',  this.nextTrack);
   },
 
   watch:{
@@ -380,12 +378,6 @@ export default {
     // 监听可以播放事件（缓冲足够）
     onCanPlay() {
       this.audioLoading = false;
-    },
-    expandSwitch() {
-      this.isExpanded = true;
-    },
-    collapseSwitch() {
-      this.isExpanded = false;
     },
     copyToClipboard(text) {
       navigator.clipboard.writeText(text).catch(err => {

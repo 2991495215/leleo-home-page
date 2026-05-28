@@ -78,9 +78,11 @@ export default {
 
     window.addEventListener('mousemove', this.handleMouseMove, { passive: true });
     window.addEventListener('mouseover', this.handleMouseOver, { passive: true });
+    window.addEventListener('touchstart', this.handleTouchStart, { passive: true });
+    window.addEventListener('scroll', this.handleScroll, { passive: true, capture: true });
     window.addEventListener('resize', this.handleResize, { passive: true });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
     }
@@ -89,6 +91,8 @@ export default {
     cursorInstanceCount--;
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('mouseover', this.handleMouseOver);
+    window.removeEventListener('touchstart', this.handleTouchStart);
+    window.removeEventListener('scroll', this.handleScroll, true);
     window.removeEventListener('resize', this.handleResize);
     document.body.style.cursor = this.originalCursor;
   },
@@ -195,6 +199,29 @@ export default {
         this.scheduleUpdate();
       }
     },
+    handleScroll() {
+      if (this.isTargeting && this.activeTarget) {
+        this.updateTargetBounds();
+        this.scheduleUpdate();
+      }
+    },
+    handleTouchStart(e) {
+      const touch = e.touches && e.touches[0];
+      if (!touch) return;
+
+      this.cursorPos.x = touch.clientX;
+      this.cursorPos.y = touch.clientY;
+      this.isVisible = true;
+
+      const target = this.findTargetFromElement(document.elementFromPoint(touch.clientX, touch.clientY));
+      if (target) {
+        this.setActiveTarget(target);
+      } else {
+        this.clearActiveTarget();
+      }
+
+      this.scheduleUpdate();
+    },
     getContentBounds(element) {
       const range = document.createRange();
       range.selectNodeContents(element);
@@ -253,6 +280,35 @@ export default {
         this.targetObserver.disconnect();
         this.targetObserver = null;
       }
+    },
+    findTargetFromElement(element) {
+      let current = element;
+
+      while (current && current !== document.body) {
+        if (current.matches && current.matches(this.targetSelector)) {
+          return current;
+        }
+        current = current.parentElement;
+      }
+
+      return null;
+    },
+    clearActiveTarget() {
+      this.stopTargetObserver();
+      this.activeTarget = null;
+      this.isTargeting = false;
+      this.targetBounds = null;
+    },
+    setActiveTarget(target) {
+      if (this.activeTarget === target) {
+        this.updateTargetBounds();
+        return;
+      }
+
+      this.activeTarget = target;
+      this.isTargeting = true;
+      this.updateTargetBounds();
+      this.observeTargetChanges(target);
     },
     scheduleUpdate() {
       if (this.animationFrameId) return;
@@ -315,31 +371,16 @@ export default {
       }
     },
     handleMouseOver(e) {
-      const directTarget = e.target;
-      const allTargets = [];
-      let current = directTarget;
-
-      while (current && current !== document.body) {
-        if (current.matches && current.matches(this.targetSelector)) {
-          allTargets.push(current);
-        }
-        current = current.parentElement;
-      }
-
-      const target = allTargets[0] || null;
+      const target = this.findTargetFromElement(e.target);
       if (!target) return;
       if (this.activeTarget === target) return;
 
-      this.activeTarget = target;
-      this.isTargeting = true;
-      this.updateTargetBounds();
-      this.observeTargetChanges(target);
+      this.setActiveTarget(target);
 
       const leaveHandler = () => {
-        this.stopTargetObserver();
-        this.activeTarget = null;
-        this.isTargeting = false;
-        this.targetBounds = null;
+        if (this.activeTarget === target) {
+          this.clearActiveTarget();
+        }
         target.removeEventListener('mouseleave', leaveHandler);
         this.scheduleUpdate();
       };

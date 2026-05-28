@@ -15,4 +15,71 @@
             }
         }
     }
+
+    .contact-dialog{
+        .v-overlay__content{
+            width: calc(100vw - 24px)!important;
+            max-width: calc(100vw - 24px)!important;
+            margin: 12px!important;
+        }
+    }
+
+    .contact-card{
+        max-height: calc(100vh - 24px);
+    }
+
+    .contact-panel{
+        padding: 12px!important;
+    }
+
+    .contact-alert{
+        line-height: 1.6;
+        word-break: break-word;
+    }
+
+    .contact-list-item{
+        padding: 10px 4px!important;
+    }
+
+    .contact-list-item .v-list-item__prepend{
+        margin-right: 10px;
+    }
+
+    .contact-list-item .v-list-item__append{
+        align-self: center;
+        margin-left: 6px;
+    }
+
+    .contact-list-item .v-list-item__content{
+        min-width: 0;
+        overflow: visible;
+    }
+
+    .contact-subtitle{
+        opacity: 1;
+        overflow: visible;
+        white-space: normal;
+    }
+
+    .contact-info-row{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        line-height: 1.45;
+        min-width: 0;
+    }
+
+    .contact-value,
+    .contact-detail{
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .contact-list-item .v-btn{
+        width: 36px;
+        height: 36px;
+    }
 }
