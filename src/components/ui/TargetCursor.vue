@@ -3,8 +3,7 @@
 </template>
 
 <script>
-// 全局变量，确保只有一个光标实例
-let cursorInstanceCount = 0;
+let activeCursorInstance = null;
 
 export default {
   name: 'TargetCursor',
@@ -21,6 +20,7 @@ export default {
   data() {
     return {
       cursorPos: { x: 0, y: 0 },
+      renderedCursorPos: { x: 0, y: 0 },
       isTargeting: false,
       targetBounds: null,
       isVisible: false,
@@ -28,6 +28,8 @@ export default {
       cursorElement: null,
       animationFrameId: null,
       targetObserver: null,
+      activeLeaveHandlers: [],
+      isCursorActive: false,
       lastCursorPos: { x: 0, y: 0 },
       lastIsVisible: false,
       lastIsTargeting: false,
@@ -41,34 +43,32 @@ export default {
       const borderWidth = 3;
       return {
         topLeft: {
-          x: this.targetBounds.left - this.cursorPos.x - borderWidth,
-          y: this.targetBounds.top - this.cursorPos.y - borderWidth
+          x: this.targetBounds.left - this.renderedCursorPos.x - borderWidth,
+          y: this.targetBounds.top - this.renderedCursorPos.y - borderWidth
         },
         topRight: {
-          x: this.targetBounds.right - this.cursorPos.x + borderWidth - cornerSize,
-          y: this.targetBounds.top - this.cursorPos.y - borderWidth
+          x: this.targetBounds.right - this.renderedCursorPos.x + borderWidth - cornerSize,
+          y: this.targetBounds.top - this.renderedCursorPos.y - borderWidth
         },
         bottomRight: {
-          x: this.targetBounds.right - this.cursorPos.x + borderWidth - cornerSize,
-          y: this.targetBounds.bottom - this.cursorPos.y + borderWidth - cornerSize
+          x: this.targetBounds.right - this.renderedCursorPos.x + borderWidth - cornerSize,
+          y: this.targetBounds.bottom - this.renderedCursorPos.y + borderWidth - cornerSize
         },
         bottomLeft: {
-          x: this.targetBounds.left - this.cursorPos.x - borderWidth,
-          y: this.targetBounds.bottom - this.cursorPos.y + borderWidth - cornerSize
+          x: this.targetBounds.left - this.renderedCursorPos.x - borderWidth,
+          y: this.targetBounds.bottom - this.renderedCursorPos.y + borderWidth - cornerSize
         }
       };
     }
   },
   mounted() {
-    // 清理所有已存在的光标
-    this.cleanupExistingCursors();
-    
-    // 检查是否已经有实例
-    if (cursorInstanceCount > 0) {
+    if (activeCursorInstance && activeCursorInstance !== this) {
       return;
     }
-    
-    cursorInstanceCount++;
+
+    this.cleanupExistingCursors();
+    activeCursorInstance = this;
+    this.isCursorActive = true;
     
     this.createCursorElement();
     this.originalCursor = document.body.style.cursor;
@@ -85,10 +85,15 @@ export default {
   beforeUnmount() {
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
     }
     this.stopTargetObserver();
+    this.cleanupLeaveHandlers();
     this.destroyCursorElement();
-    cursorInstanceCount--;
+    if (activeCursorInstance === this) {
+      activeCursorInstance = null;
+    }
+    this.isCursorActive = false;
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('mouseover', this.handleMouseOver);
     window.removeEventListener('touchstart', this.handleTouchStart);
@@ -126,8 +131,8 @@ export default {
       this.cursorCenter.style.position = 'absolute';
       this.cursorCenter.style.left = '50%';
       this.cursorCenter.style.top = '50%';
-      this.cursorCenter.style.width = '9px';
-      this.cursorCenter.style.height = '9px';
+      this.cursorCenter.style.width = '6px';
+      this.cursorCenter.style.height = '6px';
       this.cursorCenter.style.background = 'white';
       this.cursorCenter.style.boxShadow = '0 0 4px rgba(255, 255, 255, 0.65)';
       this.cursorCenter.style.borderRadius = '50%';
@@ -156,7 +161,7 @@ export default {
         if (config.borderBottom) corner.style.borderBottom = config.borderBottom;
         if (config.borderLeft) corner.style.borderLeft = config.borderLeft;
         if (config.borderTop) corner.style.borderTop = config.borderTop;
-        corner.style.transition = 'transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        corner.style.transition = 'transform 0.18s cubic-bezier(0.22, 1, 0.36, 1)';
         corner.style.willChange = 'transform';
         this.cursorElement.appendChild(corner);
         this.cursorCorners.push(corner);
@@ -186,8 +191,15 @@ export default {
       }
     },
     handleMouseMove(e) {
+      const wasHidden = !this.isVisible;
       this.cursorPos.x = e.clientX;
       this.cursorPos.y = e.clientY;
+      if (wasHidden) {
+        this.renderedCursorPos.x = e.clientX;
+        this.renderedCursorPos.y = e.clientY;
+        this.lastCursorPos.x = e.clientX;
+        this.lastCursorPos.y = e.clientY;
+      }
       if (!this.isVisible) {
         this.isVisible = true;
       }
@@ -211,6 +223,8 @@ export default {
 
       this.cursorPos.x = touch.clientX;
       this.cursorPos.y = touch.clientY;
+      this.renderedCursorPos.x = touch.clientX;
+      this.renderedCursorPos.y = touch.clientY;
       this.isVisible = true;
 
       const target = this.findTargetFromElement(document.elementFromPoint(touch.clientX, touch.clientY));
@@ -251,7 +265,7 @@ export default {
     updateTargetBounds() {
       if (!this.activeTarget) return;
 
-      if (this.activeTarget.classList.contains('leleo-left-welcome') || this.activeTarget.classList.contains('leleo-typewriter')) {
+      if (this.shouldUseContentBounds(this.activeTarget)) {
         const contentBounds = this.getContentBounds(this.activeTarget);
         if (contentBounds) {
           this.targetBounds = contentBounds;
@@ -261,9 +275,15 @@ export default {
 
       this.targetBounds = this.activeTarget.getBoundingClientRect();
     },
+    shouldUseContentBounds(element) {
+      return element.classList.contains('leleo-left-welcome') || element.classList.contains('leleo-typewriter') || element.classList.contains('msg');
+    },
+    shouldObserveTarget(target) {
+      return target.classList.contains('leleo-typewriter') || target.classList.contains('msg');
+    },
     observeTargetChanges(target) {
       this.stopTargetObserver();
-      if (!target.classList.contains('leleo-typewriter')) return;
+      if (!this.shouldObserveTarget(target)) return;
 
       this.targetObserver = new MutationObserver(() => {
         this.updateTargetBounds();
@@ -285,13 +305,37 @@ export default {
       let current = element;
 
       while (current && current !== document.body) {
-        if (current.matches && current.matches(this.targetSelector)) {
+        if (this.isClickableButton(current) || this.isClickableText(current)) {
           return current;
         }
         current = current.parentElement;
       }
 
       return null;
+    },
+    isClickableButton(element) {
+      if (!element.matches) return false;
+
+      return element.matches('button, [role="button"], .v-btn, .v-fab, .v-tab, .v-pagination__item, .v-pagination__prev, .v-pagination__next');
+    },
+    isClickableText(element) {
+      if (!element.matches) return false;
+
+      const isTextElement = element.matches('a, [role="link"], span.cursor-target, span.msg, .leleo-card-title, .leleo-card-subtitle, .musicplayer-text');
+      if (!isTextElement) return false;
+
+      const hasClickableBehavior = Boolean(
+        element.closest('button, [role="button"], a, [role="link"], .v-btn, .v-fab, .v-tab, .v-list-item, .v-chip, .project-card') ||
+        element.matches('.cursor-target, .msg')
+      );
+
+      return hasClickableBehavior && this.getTextBounds(element);
+    },
+    getTextBounds(element) {
+      const bounds = this.getContentBounds(element);
+      if (!bounds) return null;
+      if (bounds.width < 2 || bounds.height < 2) return null;
+      return bounds;
     },
     clearActiveTarget() {
       this.stopTargetObserver();
@@ -314,20 +358,37 @@ export default {
       if (this.animationFrameId) return;
 
       this.animationFrameId = requestAnimationFrame(() => {
-        this.updateCursorElement();
+        const shouldContinue = this.updateCursorElement();
         this.animationFrameId = null;
+        if (shouldContinue) {
+          this.scheduleUpdate();
+        }
       });
     },
     updateCursorElement() {
-      if (!this.cursorElement) return;
+      if (!this.cursorElement) return false;
 
       let needsUpdate = false;
+      const dx = this.cursorPos.x - this.renderedCursorPos.x;
+      const dy = this.cursorPos.y - this.renderedCursorPos.y;
+      const distance = Math.hypot(dx, dy);
 
-      // 检查位置是否变化
-      if (this.cursorPos.x !== this.lastCursorPos.x || this.cursorPos.y !== this.lastCursorPos.y) {
-        this.cursorElement.style.transform = `translate(${this.cursorPos.x}px, ${this.cursorPos.y}px) translate(-50%, -50%)`;
-        this.lastCursorPos.x = this.cursorPos.x;
-        this.lastCursorPos.y = this.cursorPos.y;
+      if (distance > 0.1) {
+        const easing = this.isTargeting ? 0.42 : 0.5;
+        this.renderedCursorPos.x += dx * easing;
+        this.renderedCursorPos.y += dy * easing;
+        if (Math.abs(this.cursorPos.x - this.renderedCursorPos.x) < 0.1) {
+          this.renderedCursorPos.x = this.cursorPos.x;
+        }
+        if (Math.abs(this.cursorPos.y - this.renderedCursorPos.y) < 0.1) {
+          this.renderedCursorPos.y = this.cursorPos.y;
+        }
+      }
+
+      if (Math.abs(this.renderedCursorPos.x - this.lastCursorPos.x) > 0.05 || Math.abs(this.renderedCursorPos.y - this.lastCursorPos.y) > 0.05) {
+        this.cursorElement.style.transform = `translate3d(${this.renderedCursorPos.x}px, ${this.renderedCursorPos.y}px, 0) translate(-50%, -50%)`;
+        this.lastCursorPos.x = this.renderedCursorPos.x;
+        this.lastCursorPos.y = this.renderedCursorPos.y;
         needsUpdate = true;
       }
 
@@ -367,14 +428,19 @@ export default {
         } else {
           this.resetCornerPositions();
         }
-        this.lastCornerPositions = JSON.parse(JSON.stringify(currentCornerPositions));
+        this.lastCornerPositions = currentCornerPositions ? JSON.parse(JSON.stringify(currentCornerPositions)) : null;
       }
+
+      return distance > 0.1;
     },
     handleMouseOver(e) {
+      if (!this.isCursorActive) return;
+
       const target = this.findTargetFromElement(e.target);
       if (!target) return;
       if (this.activeTarget === target) return;
 
+      this.cleanupLeaveHandlers();
       this.setActiveTarget(target);
 
       const leaveHandler = () => {
@@ -382,11 +448,19 @@ export default {
           this.clearActiveTarget();
         }
         target.removeEventListener('mouseleave', leaveHandler);
+        this.activeLeaveHandlers = this.activeLeaveHandlers.filter(item => item.handler !== leaveHandler);
         this.scheduleUpdate();
       };
 
+      this.activeLeaveHandlers.push({ target, handler: leaveHandler });
       target.addEventListener('mouseleave', leaveHandler);
       this.scheduleUpdate();
+    },
+    cleanupLeaveHandlers() {
+      this.activeLeaveHandlers.forEach(({ target, handler }) => {
+        target.removeEventListener('mouseleave', handler);
+      });
+      this.activeLeaveHandlers = [];
     }
   }
 };

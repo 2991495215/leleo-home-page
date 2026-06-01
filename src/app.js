@@ -211,62 +211,38 @@ export default {
   methods: {
     getCookie,setMeta,getFormattedTime,getFormattedDate,dataConsole,
 
-    setMainProperty(imageurl){
+    applyThemeConfig(themeConfig){
       const root = document.documentElement;
-      let leleodata = this.getCookie("leleodata");
-      if(leleodata){
-        root.style.setProperty('--leleo-welcomtitle-color', `${leleodata.color.welcometitlecolor}`);
-        root.style.setProperty('--leleo-vcard-color', `${leleodata.color.themecolor}`);
-        root.style.setProperty('--leleo-brightness', `${leleodata.brightness}%`);
-        root.style.setProperty('--leleo-blur', `${leleodata.blur}px`); 
-      }else{
-        root.style.setProperty('--leleo-welcomtitle-color', `${this.configdata.color.welcometitlecolor}`);
-        root.style.setProperty('--leleo-vcard-color', `${this.configdata.color.themecolor}`);  
-        root.style.setProperty('--leleo-brightness', `${this.configdata.brightness}%`);  
-        root.style.setProperty('--leleo-blur', `${this.configdata.blur}px`);
+      root.style.setProperty('--leleo-welcomtitle-color', `${themeConfig.color.welcometitlecolor}`);
+      root.style.setProperty('--leleo-vcard-color', `${themeConfig.color.themecolor}`);
+      root.style.setProperty('--leleo-brightness', `${themeConfig.brightness}%`);
+      root.style.setProperty('--leleo-blur', `${themeConfig.blur}px`);
+    },
+
+    applyBackgroundConfig(backgroundConfig, deviceType){
+      const root = document.documentElement;
+      const background = backgroundConfig[deviceType];
+
+      if(background.type == "pic"){
+        root.style.setProperty('--leleo-background-image-url', `url('${background.datainfo.url}')`);
+        return background.datainfo.url;
       }
-  
-      let leleodatabackground = this.getCookie("leleodatabackground");
+
+      this.videosrc = background.datainfo.url;
+      return "";
+    },
+
+    setMainProperty(imageurl){
+      const leleodata = this.getCookie("leleodata");
+      const leleodatabackground = this.getCookie("leleodatabackground");
       const { xs } = useDisplay();
-      if(leleodatabackground){
-        if(xs.value){
-          if(leleodatabackground.mobile.type == "pic"){
-            root.style.setProperty('--leleo-background-image-url', `url('${leleodatabackground.mobile.datainfo.url}')`);
-            imageurl = leleodatabackground.mobile.datainfo.url;
-            return imageurl;
-          }else{
-            this.videosrc = leleodatabackground.mobile.datainfo.url;
-          }
-        }else{
-          if(leleodatabackground.pc.type == "pic"){
-            root.style.setProperty('--leleo-background-image-url', `url('${leleodatabackground.pc.datainfo.url}')`);
-            imageurl = leleodatabackground.pc.datainfo.url;
-            return imageurl;
-          }else{
-            this.videosrc = leleodatabackground.pc.datainfo.url;
-          }
-        }
-          
-      }else{
-        if(xs.value){
-          if(this.configdata.background.mobile.type == "pic"){
-            root.style.setProperty('--leleo-background-image-url', `url('${this.configdata.background.mobile.datainfo.url}')`);
-            imageurl = this.configdata.background.mobile.datainfo.url;
-            return imageurl;
-          }else{
-            this.videosrc = this.configdata.background.mobile.datainfo.url;
-          }
-        }else{
-          if(this.configdata.background.pc.type == "pic"){
-            root.style.setProperty('--leleo-background-image-url', `url('${this.configdata.background.pc.datainfo.url}')`);
-            imageurl = this.configdata.background.pc.datainfo.url;
-            return imageurl;
-          }else{
-            this.videosrc = this.configdata.background.pc.datainfo.url;
-          }
-          
-        }
-      }
+      const themeConfig = leleodata || this.configdata;
+      const backgroundConfig = leleodatabackground || this.configdata.background;
+      const deviceType = xs.value ? "mobile" : "pc";
+
+      this.applyThemeConfig(themeConfig);
+      imageurl = this.applyBackgroundConfig(backgroundConfig, deviceType);
+      return imageurl;
     },
 
     projectcardsShow(key){
