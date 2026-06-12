@@ -55,9 +55,9 @@ const config = {
 	//社交按钮
 	socialPlatformIcons: [
 		// { icon: "mdi-github", link: "https://www.github.com/leleo886", tab: "wechat" },
-		{ icon: "mdi-email", link: "mailto:a2832893528@qq.com", tab: "email" },
+		{ icon: "mdi-email", link: "mailto:admin@trent30.com", tab: "email" },
 		{ icon: "mdi-qqchat", link: "https://qm.qq.com/q/AraDkhWLIs", tab: "qq" },
-		{ icon: "mdi-wechat", link: "weixin://dl/chat?huangleihhh", tab: "wechat" },
+		{ icon: "mdi-wechat", link: "weixin://dl/chat?ssLuoXiaoHeiShiMao", tab: "wechat" },
 		// { icon: "mdi-youtube", link: "https://www.youtube.com", tab: "wechat" },
 		// { icon: "mdi-facebook", link: "https://www.facebook.com", tab: "wechat" }
 	],
@@ -182,7 +182,7 @@ const config = {
 					{ name: "小黑耗子", value: "2795301864", type: "qq", icon: "mdi-account", detail: "" },
 					{ name: "AI绘画群", value: "568173857", type: "group", icon: "mdi-account-group", detail: "需审核，非__控勿入" },
 					{ name: "赛博丹炉讨论组", value: "828971018", type: "group", icon: "mdi-account-group", detail: "锁群" },
-					{ name: "AI前沿通知", value: "684836402", type: "group", icon: "mdi-account-group", detail: "暂不启用，有事私信" }
+					{ name: "AI前沿通知", value: "684836402", type: "group", icon: "mdi-account-group", detail: "" }
 				]
 			},
 			{
@@ -191,7 +191,8 @@ const config = {
 				description: "常用的联系方式，有重要事情请发邮件联系！",
 				items: [
 					{ name: "QQ邮箱", value: "a2832893528@qq.com", type: "email", icon: "mdi-email", detail: "" },
-					{ name: "谷歌邮箱", value: "2991495215@gmail.com", type: "email", icon: "mdi-email", detail: "" }
+					{ name: "谷歌邮箱", value: "2991495215@gmail.com", type: "email", icon: "mdi-email", detail: "" },
+					{ name: "管理员邮箱", value: "admin@trent30.com", type: "email", icon: "mdi-email", detail: "" }
 				]
 			},
 			{
@@ -199,7 +200,6 @@ const config = {
 				icon: "mdi-wechat",
 				description: "无事无扰！！",
 				items: [
-					{ name: "微信", value: "huangleihhh", type: "wechat", icon: "mdi-wechat", detail: "" },
 					{ name: "微信回复号", value: "ssLuoXiaoHeiShiMao", type: "wechat", icon: "mdi-wechat", detail: "" }
 				]
 			}
