@@ -155,8 +155,8 @@ const config = {
 	projectcards: [
 		{ go: "🗂️ 前往", img: "/img/General Wallpaper/compressed_images/1407685.png", title: "Trent Shop", subtitle: "个人小店", text: "售卖自用软件、脚本与折腾成果", url: "https://shop.trent30.org/", show: false },
 		{ go: "📝 前往", img: "/img/General Wallpaper/compressed_images/320687.jpg", title: "Airport", subtitle: "网络优化方案", text: "跨越数字边界的全天候网络接入点", url: "https://sub0.zinc.run/", show: false },
-		{ go: "📡 前往", img: "/img/General Wallpaper/compressed_images/337420.jpg", title: "Probe", subtitle: "服务器状态监控", text: "实时查看服务器在线状态、负载与资源占用", url: "https://nz.trent30.com/", show: false },
-		{ go: "🔌 前往", img: "/img/General Wallpaper/compressed_images/1407656.jpg", title: "New API", subtitle: "API 聚合服务", text: "统一管理与转发多模型 API，方便接入不同 AI 服务", url: "https://newapi.trent30.com/", show: false },
+		{ go: "📡 前往", img: "/img/General Wallpaper/compressed_images/337420.jpg", title: "Probe", subtitle: "服务器状态监控", text: "实时查看服务器在线状态、负载与资源占用", url: "https://k.zinc.run/", show: false },
+		{ go: "🔌 前往", img: "/img/General Wallpaper/compressed_images/1407656.jpg", title: "New API", subtitle: "API 聚合服务", text: "统一管理与转发多模型 API，方便接入不同 AI 服务", url: "https://api.zinc.run/", show: false },
 		{ go: "🎧 前往", img: "/img/General Wallpaper/compressed_images/35957.jpg", title: "Anime Music World", subtitle: "首次网站设计", text: "22年大学时期首个独立完成的网站设计，围绕动漫音乐世界搭建的早期作品，留作纪念", url: "https://anime-music-world.trent30.com/", show: false },
 		{ go: "🚀 前往", img: "/img/General Wallpaper/compressed_images/813527.jpg", title: "NextChat", subtitle: "AI 对话项目", text: "一个开源的 AI 聊天客户端，支持多模型、Markdown、插件与多端部署", url: "https://nextchat.thirty30.top/", show: false },
 		{ go: "🎨 前往", img: "/img/General Wallpaper/compressed_images/906482.jpg", title: "GPT Image", subtitle: "AI 图片生成", text: "基于 AI 的图片生成工具，快速创建创意视觉内容", url: "https://gpt-image.trent30.com/", show: false },
