@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thirty30.top/sitemap.xml
